@@ -11,7 +11,7 @@ using System;
 namespace DatingApp.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20180706200120_ExtendedUserClass")]
+    [Migration("20180709132231_ExtendedUserClass")]
     partial class ExtendedUserClass
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,7 +33,7 @@ namespace DatingApp.API.Migrations
 
                     b.Property<string>("Url");
 
-                    b.Property<int?>("UserId");
+                    b.Property<int>("UserId");
 
                     b.HasKey("Id");
 
@@ -92,9 +92,10 @@ namespace DatingApp.API.Migrations
 
             modelBuilder.Entity("DatingApp.API.models.Photo", b =>
                 {
-                    b.HasOne("DatingApp.API.models.User")
+                    b.HasOne("DatingApp.API.models.User", "User")
                         .WithMany("Photos")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
